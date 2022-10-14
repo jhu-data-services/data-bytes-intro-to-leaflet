@@ -1,0 +1,56 @@
+<!--This is a comment. Comments are not displayed in the browser-->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>01 - First Leaflet Map</title>
+
+  <!-- <link> references the Leaflet CSS-->
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""
+  />
+
+  <!-- <script> references the Leaflet Javascript Files-->
+  <script
+    src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""
+  ></script>
+
+<!--Provide height and width specification using CSS for the map-->
+<style>
+#map {
+    width: 960px;
+    height:500px;
+}
+</style>
+
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+<script>
+
+    var map = L.map('map',{
+    center: [39.32907, -76.61814],
+    zoom: 15
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+</script>
+
+</body>
+
+</html>
