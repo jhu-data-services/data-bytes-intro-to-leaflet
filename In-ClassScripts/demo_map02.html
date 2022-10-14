@@ -1,5 +1,6 @@
 <!--This is a comment. Comments are not displayed in the browser-->
-<!--This map provies the basic syntax needed to render a map using leaflet-->
+<!--This map demonstrates how to add a title and customize the position of the map using Cascading Style Sheets-->
+
 
 <!DOCTYPE html>
 
@@ -7,7 +8,7 @@
 
 <head>
 
-<title>01 - First Leaflet Map</title>
+<title>02 - Demo Map 2</title>
 
   <!-- <link> references the Leaflet CSS-->
 
@@ -25,19 +26,20 @@
     crossorigin=""
   ></script>
 
-<!-- Position the map and title with Cascading Style Sheet (CSS) -->
+<!--Provide height and width specification using CSS for the map-->
 <style>
-#map {
-    width: 960px;
-    height:500px;
-}
+body { margin:0; padding:0; }
+  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
 </style>
 
 </head>
 
 <body>
 
-    <div id="map"></div>
+  <div id="map-title">Demo Map 2: Here's a Map Title!</div>
+
+  <div id="map"></div>
 
 <script>
 
