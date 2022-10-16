@@ -1,0 +1,85 @@
+<!--This is a comment. Comments are not displayed in the browser-->
+<!--This map demonstrates how to add a title and change the basemap-->
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>03 - Map 3</title>
+
+  <!-- <link> references the Leaflet CSS-->
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""
+  />
+
+  <!-- <script> references the Leaflet Javascript Files-->
+  <script
+    src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""
+  ></script>
+
+<!--Provide height and width specification using CSS for the map-->
+<style>
+body { margin:0; padding:0; }
+  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
+</style>
+
+</head>
+
+<body>
+
+  <div id="map-title">Demo map 3: Changing basemaps</div>
+  <div id="map"></div>
+
+<script>
+
+    var map = L.map('map',{
+    center: [39.32907, -76.61814],
+    zoom: 15
+    });
+
+    /* display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
+    L.tileLayer(
+      'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://osm.org/copyright">\
+          OpenStreetMap</a> contributors, &copy;\
+          <a href="https://carto.com/attribution">CARTO</a>'
+    }).addTo(map);
+
+    // Read markers data from data.csv
+  $.get('./data.csv', function(csvString) {
+
+// Use PapaParse to convert string to array of objects
+var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+
+// For each row in data, create a marker and add it to the map
+// For each row, columns `Latitude`, `Longitude`, and `Title` are required
+for (var i in data) {
+  var row = data[i];
+
+  var marker = L.marker([row.Latitude, row.Longitude], {
+    opacity: 1
+  }).bindPopup(row.PermitNum);
+  
+  marker.addTo(map);
+}
+
+});
+
+
+
+
+</script>
+
+</body>
+
+</html>

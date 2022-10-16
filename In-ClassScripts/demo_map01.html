@@ -1,57 +1,49 @@
-<!--This is a comment. Comments are not displayed in the browser-->
 <!--This map provies the basic syntax needed to render a map using leaflet-->
-
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <title>01 - First Leaflet Map</title>
 
-<head>
-
-<title>01 - First Leaflet Map</title>
-
-  <!-- <link> references the Leaflet CSS-->
-
-  <link
+    <!-- <link> references the Leaflet CSS-->
+    <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
     crossorigin=""
-  />
+    />
 
-  <!-- <script> references the Leaflet Javascript Files-->
-  <script
+    <!-- <script> references the Leaflet Javascript Files-->
+    <script 
     src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
     crossorigin=""
-  ></script>
+    >
+    </script>
+    
+    <!-- Position the map and title with Cascading Style Sheet (CSS) -->
+    <style>
+    #map {
+      width: 960px;
+      height:500px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="map">
+    </div>
 
-<!-- Position the map and title with Cascading Style Sheet (CSS) -->
-<style>
-#map {
-    width: 960px;
-    height:500px;
-}
-</style>
+    <script>
+      var map = L.map('map',{
+        center: [39.32907, -76.61814], zoom: 15
+        });
 
-</head>
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
 
-<body>
-
-    <div id="map"></div>
-
-<script>
-
-    var map = L.map('map',{
-    center: [39.32907, -76.61814],
-    zoom: 15
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-</script>
-
-</body>
-
+  </body>
+  
 </html>
