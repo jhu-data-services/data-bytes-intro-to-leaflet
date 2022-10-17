@@ -26,7 +26,7 @@ There are no pre-class instructions for this 1-hour workshop. If you are interes
     - *demo_map04.html*: consolidates basemaps layers into a group
     - *demo_map05.html*: adds points to the map.  
 - PresentationMaterials: This folder contains PowerPoint slides and other presentation materials used in the workshop
-- Resources: This folder contains cheatsheets to assist you during the workshop and links to external sources for you to continue your learning
+- Resources: This folder contains a markdown file with a list of resources for learning Leaflet.
 
 
 ## Post-Class Survey

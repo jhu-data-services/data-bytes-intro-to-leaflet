@@ -1,4 +1,4 @@
-<!--This map adds -->
+<!--This map adds some points to the map and references Leaflet's tutorial on creating layer groups and controls (https://leafletjs.com/examples/layers-control/) -->
 <!DOCTYPE html>
 
 <html>
@@ -32,7 +32,7 @@
   
   <body>
     <!--Add a title to be displayed on the map-->
-    <div id="map-title">Demo map 5: Adding More Data</div>
+    <div id="map-title">Demo map 5: Adding Markers Manually</div>
     <div id="map"></div>
     
     <script>
@@ -72,12 +72,15 @@
         "Carto Dark Matter": CartoDB_DarkMatter
       };
 
-      /* Add points to the map manually */
+      /* Create points to add to the map, with popup information */
       var MSEL = L.marker([39.329, -76.619]).bindPopup('Milton S. Eisenhower Library. This point was added manually.'),
           BMA = L.marker([39.325, -76.619]).bindPopup('Baltimore Museum of Art. This point was added manually.')
+
   
+      /* Create a layer group grouping these points together */
       var poi = L.layerGroup([MSEL, BMA]);
 
+      /* Create an overlay maps object, and include the layer group */
       var overlayMaps = {
         "Points of Interest": poi
       };
@@ -89,7 +92,7 @@
         layers: [Stamen_Watercolor, poi]  // specifying default layers to add to map
         });
 
-      /* Add basemaps group to map */
+      /* Create layers control with separate sections for basemaps and overlay maps */
       var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
     </script>
