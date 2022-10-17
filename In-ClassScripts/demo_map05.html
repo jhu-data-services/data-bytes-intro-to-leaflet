@@ -1,0 +1,97 @@
+<!--This map adds -->
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <!--It's good practice to give your webpage a title-->
+    <title>05 - Demo Map 5</title>
+  
+    <!--references the Leaflet CSS. Make sure you're using the newest version, pull from Leaflet's main site-->
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+    crossorigin=""
+    />
+
+    <!--references the Leaflet Javascript files. Make sure you're using the newest version, pull from Leaflet's main site-->
+    <script
+    src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""
+    >
+    </script>
+    
+    <!--Position the map and title with Cascading Style Sheet (CSS) -->
+    <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+    #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
+    </style>
+  </head>
+  
+  <body>
+    <!--Add a title to be displayed on the map-->
+    <div id="map-title">Demo map 5: Adding More Data</div>
+    <div id="map"></div>
+    
+    <script>
+
+      /* USGS Topography tiles. Code copied from https://leaflet-extras.github.io/leaflet-providers/preview */
+      var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 20,
+        attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+        });
+
+      /* Stamen Watercolor tiles. Code copied from https://leaflet-extras.github.io/leaflet-providers/preview */
+      var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abcd',
+        minZoom: 1,
+        maxZoom: 16,
+        ext: 'jpg'
+        });   
+                
+      /* Esri World Imagery tiles. Code copied from Code copied from https://leaflet-extras.github.io/leaflet-providers/preview  */
+      var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
+      /* Carto Dark Matter tiles. Code copied from Code copied from https://leaflet-extras.github.io/leaflet-providers/preview  */
+      var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      });
+
+      /* Create an object called baseMaps containing key/value pairs for the basemap layers */ 
+      var baseMaps = {
+        "USGS Topo": USGS_USTopo,
+        "Stamen Watercolor": Stamen_Watercolor,
+        "Esri World Imagery": Esri_WorldImagery,
+        "Carto Dark Matter": CartoDB_DarkMatter
+      };
+
+      /* Add points to the map manually */
+      var MSEL = L.marker([39.329, -76.619]).bindPopup('Milton S. Eisenhower Library. This point was added manually.'),
+          BMA = L.marker([39.325, -76.619]).bindPopup('Baltimore Museum of Art. This point was added manually.')
+  
+      var poi = L.layerGroup([MSEL, BMA]);
+
+      var overlayMaps = {
+        "Points of Interest": poi
+      };
+      
+      /* Create map object and specify default layer to add */
+      var map = L.map('map',{
+        center: [39.32907, -76.61814], 
+        zoom: 15, 
+        layers: [Stamen_Watercolor, poi]  // specifying default layers to add to map
+        });
+
+      /* Add basemaps group to map */
+      var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    </script>
+  </body>
+</html>

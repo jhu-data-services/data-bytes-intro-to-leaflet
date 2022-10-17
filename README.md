@@ -14,15 +14,17 @@ As of March 2020, Data Services workshops are being held virtually on Zoom. This
 
 
 ## Pre-Class Instructions
-Before the class, follow the [installation instructions to download all required software and tools for this workshop](link-to-github-installation-repo).
+There are no pre-class instructions for this 1-hour workshop. If you are interested in following along the demonstration portion, we recommend cloning and/or downloading a copy of this repository to your own computer. Please prepare to have an IDE or text editor (such as VScode, Sublime Text, Atom, notepad) ready to use to view and edit html files. 
 
 
 ## Description of Files
-- Data: This folder contains raw data files to be used during hands-on activities in the workshop
 - In-ClassScripts: This folder contains code files you will need for the workshop:
-    - [file1]
-    - [file2]
-    - [file3]
+    - *base.html*: this is a base html file with the sections that are required to create a new leaflet map defined, but unfilled
+    - *demo_map01.html*: a basic leaflet map. 
+    - *demo_map02.html*: contains modified html and css to change the layout of the map shown in demo 1
+    - *demo_map03.html*: modifies demo map 2 by demonstraing how to add different basemaps from various sources
+    - *demo_map04.html*: consolidates basemaps layers into a group
+    - *demo_map05.html*: adds points to the map.  
 - PresentationMaterials: This folder contains PowerPoint slides and other presentation materials used in the workshop
 - Resources: This folder contains cheatsheets to assist you during the workshop and links to external sources for you to continue your learning
 

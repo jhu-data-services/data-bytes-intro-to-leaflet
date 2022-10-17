@@ -1,64 +1,91 @@
-<!--This is a comment. Comments are not displayed in the browser-->
-<!--This map demonstrates how to add a title and change the basemap-->
-
-
+<!--This map demonstrates how to add basemaps from different sources and how to add a control panel to change layers.
+Basemap options can be viewed at https://leaflet-extras.github.io/leaflet-providers/preview/-->
 <!DOCTYPE html>
 
 <html>
-
-<head>
-
-<title>03 - Map 3</title>
-
-  <!-- <link> references the Leaflet CSS-->
-
-  <link
+  <head>
+    <!--It's good practice to give your webpage a title-->
+    <title>03 - Demo Map 3</title>
+  
+    <!--references the Leaflet CSS. Make sure you're using the newest version, pull from Leaflet's main site-->
+    <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
     crossorigin=""
-  />
+    />
 
-  <!-- <script> references the Leaflet Javascript Files-->
-  <script
+    <!--references the Leaflet Javascript files. Make sure you're using the newest version, pull from Leaflet's main site-->
+    <script
     src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
     crossorigin=""
-  ></script>
+    >
+    </script>
+    
+    <!--Position the map and title with Cascading Style Sheet (CSS) -->
+    <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+    #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
+    </style>
+  </head>
+  
+  <body>
+    <!--Add a title to be displayed on the map-->
+    <div id="map-title">Demo map 3: Changing basemaps</div>
+    <div id="map"></div>
+    
+    <script>
+      var map = L.map('map',{
+        center: [39.32907, -76.61814], zoom: 15
+        });
+      
+      /* Control panel to display map layers */
+      var controlLayers = L.control.layers( null, null, {
+        position: "topright",
+        collapsed: false
+        }).addTo(map);
+      
+      /* Display USGS Topography tiles. Code copied from https://leaflet-extras.github.io/leaflet-providers/preview */
+      var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 20,
+        attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+        }).addTo(map); //  .addTo(map) is needed to make this the default basemap shown
+      controlLayers.addBaseLayer(USGS_USTopo, 'Topography by USGS')  
 
-<!--Provide height and width specification using CSS for the map-->
-<style>
-body { margin:0; padding:0; }
-  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
-  #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
-</style>
+      /* Add Stamen Watercolor tiles. Code copied from https://leaflet-extras.github.io/leaflet-providers/preview */
+      var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abcd',
+        minZoom: 1,
+        maxZoom: 16,
+        ext: 'jpg'
+        });   
+      controlLayers.addBaseLayer(Stamen_Watercolor, 'Watercolor by Stamen')
+                
+      /* Add Esri World Imagery tiles. Code copied from Code copied from https://leaflet-extras.github.io/leaflet-providers/preview  */
+      var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+      controlLayers.addBaseLayer(Esri_WorldImagery, 'Satelite Imagery from Esri')
 
-</head>
+      /* Add Carto Dark Matter tiles. Code copied from Code copied from https://leaflet-extras.github.io/leaflet-providers/preview  */
+      var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      });
+      controlLayers.addBaseLayer(CartoDB_DarkMatter, 'Dark Matter by Carto')
 
-<body>
+      /* Note. Some of the basemaps require a subscription. For example, you can try to add Thunderforest layers to your map, but without a subscription (api key), they won't render */
+      var Thunderforest_SpinalMap = L.tileLayer('https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png?apikey={apikey}', {
+        attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        apikey: '<your apikey>', // an api key is needed here. without one, the basemap won't display. 
+        maxZoom: 22
+        });
+      controlLayers.addBaseLayer(Thunderforest_SpinalMap, "Thunderforest")  
 
-  <div id="map-title">Demo map 3: Changing basemaps</div>
-  <div id="map"></div>
-
-<script>
-
-    var map = L.map('map',{
-    center: [39.32907, -76.61814],
-    zoom: 15
-    });
-
-    /* display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://osm.org/copyright">\
-          OpenStreetMap</a> contributors, &copy;\
-          <a href="https://carto.com/attribution">CARTO</a>'
-    }).addTo(map);
-
-
-
-</script>
-
-</body>
-
+    </script>
+  </body>
 </html>

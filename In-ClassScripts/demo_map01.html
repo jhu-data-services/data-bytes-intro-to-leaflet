@@ -1,11 +1,12 @@
-<!--This map provies the basic syntax needed to render a map using leaflet-->
+<!--This map provides the basic syntax needed to render a map using leaflet-->
 <!DOCTYPE html>
 
 <html>
   <head>
+    <!--It's good practice to give your webpage a title-->
     <title>01 - First Leaflet Map</title>
 
-    <!-- <link> references the Leaflet CSS-->
+    <!--references the Leaflet CSS. Make sure you're using the newest version, pull from Leaflet's main site-->
     <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
@@ -13,7 +14,7 @@
     crossorigin=""
     />
 
-    <!-- <script> references the Leaflet Javascript Files-->
+    <!--references the Leaflet Javascript files. Make sure you're using the newest version, pull from Leaflet's main site-->
     <script 
     src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
@@ -21,7 +22,7 @@
     >
     </script>
     
-    <!-- Position the map and title with Cascading Style Sheet (CSS) -->
+    <!--Position the map and title with Cascading Style Sheet (CSS) -->
     <style>
     #map {
       width: 960px;
@@ -31,9 +32,11 @@
   </head>
   
   <body>
+    <!--Leaflet requires a <div> element. Give it an id like "map"-->
     <div id="map">
     </div>
 
+    <!--Where the magic happens. Create a variable called "map", provide coordinates to center on, a zoom level and add layers here-->
     <script>
       var map = L.map('map',{
         center: [39.32907, -76.61814], zoom: 15
